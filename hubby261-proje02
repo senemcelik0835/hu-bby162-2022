@@ -1,0 +1,128 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN1ix7265t1uN0pgxUkD2nc",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/senemcelik0835/hu-bby162-2022/blob/main/hubby261-proje02\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "YdTosmeFBhRM"
+      },
+      "outputs": [],
+      "source": [
+        "from tkinter import* \n",
+        "\n",
+        "arayuz = Tk()\n",
+        "arayuz.title(\"Phyton Arayüz Ekleme\")\n",
+        "\n",
+        "canvas= Canvas(arayuz, height=450, width=700) \n",
+        "canvas.pack()   \n",
+        "\n",
+        "frame_ust = Frame(arayuz, bg='orange') \n",
+        "frame_ust.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.1) \n",
+        "\n",
+        "frame_alt_sol = Frame(arayuz, bg='orange') \n",
+        "frame_alt_sol.place(relx=0.1, rely=0.20, relwidth=0.4, relheight=0.75)\n",
+        "\n",
+        "frame_alt_sag = Frame(arayuz, bg='orange') \n",
+        "frame_alt_sag.place(relx=0.75, rely=0.20, relwidth=0.4, relheight=0.75)\n",
+        "\n",
+        "hatirlatma_etiket = Label(frame_ust, bg='orange', text=\"Örümcek göndermeyi unutma!\", font= \"times new roman 14 bold\") \n",
+        "hatirlatma_etiket.pack(padx=10, pady=10, side = LEFT) # yazıyı sola yaslar\n",
+        "\n",
+        "Label(frame_alt_sol, bg='orange', text=\"Menü: \", font= \"times new roman 14 bold\").pack(padx=10, pady=10, anchor=NW) \n",
+        "\n",
+        "var= IntVar \n",
+        "\n",
+        "R1= Radiobutton(frame_alt_sol, text=\"0) Çıkış\", variable= var, value=1, bg='orange',font= \"times new roman 10\" )\n",
+        "R1.pack(anchor=NW, padx=15, pady=5)\n",
+        "\n",
+        "R2= Radiobutton(frame_alt_sol, text=\"1) URL Listele\", variable= var, value=2, bg='orange',font= \"times new roman 10\" )\n",
+        "R2.pack(anchor=NW, padx=15, pady=5)\n",
+        "\n",
+        "R3= Radiobutton(frame_alt_sol, text=\"2) URL Ekle\", variable= var, value=3, bg='orange',font= \"times new roman 10\" )\n",
+        "R3.pack(anchor=NW, padx=15, pady=5)\n",
+        "\n",
+        "R4=Radiobutton(frame_alt_sol, text=\"3) Örümcek Gönder\", variable= var, value=4, bg='orange',font= \"times new roman 10\" )\n",
+        "R4.pack(anchor=NW, padx=15, pady=5)\n",
+        "\n",
+        "R5=Radiobutton(frame_alt_sol, text=\"4) Sonuçları Listele\", variable= var, value=5, bg='orange',font= \"times new roman 10\" )\n",
+        "R5.pack(anchor=NW, padx=15, pady=5)\n",
+        "\n",
+        "\n",
+        "Label(frame_alt_sol, bg='orange', text=\"URL İşleme: \", font= \"times new roman 14 bold\").pack(padx=10, pady=10, anchor=NW)\n",
+        "\n",
+        "metin_alani= Text(frame_alt_sag, height=9, widht=40)\n",
+        "metin_alani.tag_configure('style', foreground='blue', 'verdana', 8, 'bold') #yazı karakterini seçer.\n",
+        "metin_alani.pack()\n",
+        "\n",
+        "karsilama_metni='URL'\n",
+        "metin_alani.insert(END, karsilama_metni, 'style')\n",
+        "\n",
+        "gonder_botonu= Button(frame_alt_sag, text='kaydet', command=dataWrite)\n",
+        "gonder_butonu.pack(anchor=S)\n",
+        "\n",
+        "arayuz.mainloop() \n",
+        "\n",
+        "import time\n",
+        "from dataURL import DataURL\n",
+        "from getURL import GetURL\n",
+        "\n",
+        "useDataURL = DataURL()\n",
+        "useGetURL = GetURL()\n",
+        "\n",
+        "print(\"-: Mini Örümceğe hoş geldiniz! :-\")\n",
+        "print(\"|------------------------------|\")\n",
+        "print(\"\")\n",
+        "time.sleep(2)\n",
+        "\n",
+        "while True:\n",
+        "    print(\"Menü: 0)Çıkış 1)URL Listele 2)URL Ekle 3)Örümcek Gönder 4)Sonuçları Listele\")\n",
+        "    print(\"Lütfen seçiminizi giriniz!\")\n",
+        "    menuSecim = (input(\"Tercihiniz: \"))\n",
+        "    if menuSecim.isdigit():\n",
+        "        menuSecim = int(menuSecim)\n",
+        "        if menuSecim == 0:\n",
+        "            print(\"Mini Örümcek kapatılıyor...\")\n",
+        "            time.sleep(1)\n",
+        "            break\n",
+        "        elif menuSecim == 1:\n",
+        "            useDataURL.dataRead()\n",
+        "        elif menuSecim == 2:\n",
+        "            useDataURL.dataWrite()\n",
+        "        elif menuSecim == 3:\n",
+        "            useGetURL.getWeb()\n",
+        "        elif menuSecim == 4:\n",
+        "            useGetURL.getList()\n",
+        "        elif menuSecim>=4:\n",
+        "            print(\"Menü numarası 0-4 arasında olmalıdır!\")\n",
+        "    else:\n",
+        "        print(\"Menü numaranızı doğru yazdığınıza emin olun!\")"
+      ]
+    }
+  ]
+}
